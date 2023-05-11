@@ -1,18 +1,23 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-import SectionServicios from '@/Componentes/SectionServicios'
+import axios from 'axios'
 
+const data ={
+  email: 'test@consul-sts.com',
+  password: 'password'
+}
 
 export default function Home() {
-//Codigo JS
-    
-    //Seccion
-    //---Banner (titulo, descripcion)
-    //---Card 1 (icono, titulo, descripcion)
-    //---Card 2 (icono, titulo, descripcion)
-    //---Card 3 (icono, titulo, descripcion)
+  const obtenerToken =async ()=>{
+      axios.post('https://auth.consul-sts.com/auth/signin',data)
+      .then(res=>{
+        console.log(res)
+        console.log(res.data)
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+      
+  }
 
   return ( //Objeto JSX
     <>
@@ -23,7 +28,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SectionServicios></SectionServicios>
+      <button onClick={obtenerToken}>Obtener Token</button>
+
     </>
 
   )
